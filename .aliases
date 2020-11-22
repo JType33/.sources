@@ -22,10 +22,16 @@ dbrebuild()
    sqlmigrate
    sqlseedall
 }
-mkcd ()
+mkcd()
 {
     mkdir -p -- "$1" &&
       cd -P -- "$1"
+}
+gcp()
+{
+   git add .
+   git commit -m "$1"
+   git push
 }
 
 alias ..='cd ..'
