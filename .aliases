@@ -33,7 +33,6 @@ gcp()
    git commit -m "$1"
    git push
 }
-
 alias ..='cd ..'
 alias .-='cd -'
 alias xx='rm -rf'
