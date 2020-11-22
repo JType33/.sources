@@ -1,0 +1,74 @@
+alias ..='cd ..'
+alias .-='cd -'
+alias xx='rm -rf'
+alias rimraf='xx'
+alias appIO="cd /home/$USER/appIO"
+alias mod1='cd ~/appIO/module1'
+alias mod2='cd ~/appIO/module2'
+alias mod3='cd ~/appIO/module3'
+alias mod4='cd ~/appIO/module4'
+alias mod5='cd ~/appIO/module5'
+alias mod6='cd ~/appIO/module6'
+alias wk6='cd ~/appIO/module2/wk6'
+alias wk7='cd ~/appIO/module3/wk7'
+alias wk8='cd ~/appIO/module3/wk8'
+alias wk9='cd ~/appIO/module3/wk9'
+alias ginit='git init'
+alias gfi='git init && touch .sticky && gdc'
+alias gac='git add . && git commit -m'
+alias gdc='git add . && git commit -m "."'
+alias gdp='git add . && git commit -m "." && git push'
+alias psql="psql -h localhost"
+alias sql="npx sequelize-cli"
+alias sqlinit="npx sequelize-cli init"
+alias sqlmigrate='npx sequelize-cli db:migrate'
+alias sqlundo='npx sequelize-cli db:migrate:undo'
+alias sqlhardundo='npx sequelize-cli db:migrate:undo:all'
+alias sqlwhoops='sqlundo'
+alias sqlohfuck='sqlhardundo'
+alias sqlmod='npx sequelize-cli model:generate --name'
+alias sqlseed='npx sequelize-cli seed:generate --name'
+alias sqlseedall='npx sequelize-cli db:seed:all'
+alias sqlseedundo='npx sequelize-cli db:seed:undo:all'
+alias sqlmigrundo='npx sequelize-cli db:migrate:undo:all'
+alias nenv='npx dotenv'
+alias nenvsql='npx dotenv sequelize'
+alias nenvmod='npx dotenv sequelize model:generate --name'
+alias nenvmigrate='npx dotenv sequelize db:migrate'
+alias nenvseed='npx dotenv sequelize db:seed:all'
+alias bsource="source /home/$USER/.bashrc"
+alias ll='ls -la'
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ <\1> /'
+}
+export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u\[\033[00m\]:\[\033[01;36m\]\W/\[\033[00;33m\]\$(parse_git_branch)\[\033[00m\]$ "
+#'${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+alienate()
+{
+   echo "alias $1='$2'" >> /home/jtype/.bashrc
+   source '/home/jtype/.bashrc'
+}
+vscode()
+{
+   if [[ $# -eq 0 ]] ; then
+       code .
+   else code $1
+   fi
+}
+dbdestroy()
+{
+   sqlseedundo
+   sqlmigrundo
+}
+dbrebuild()
+{
+   sqlseedundo
+   sqlmigrundo
+   sqlmigrate
+   sqlseedall
+}
+mkcd ()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
