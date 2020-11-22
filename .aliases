@@ -1,3 +1,33 @@
+alienate()
+{
+   echo "alias $1='$2'" >> /home/$USER/.sources/.aliases
+   bsource
+}
+vscode()
+{
+   if [[ $# -eq 0 ]] ; then
+       code .
+   else code $1
+   fi
+}
+dbdestroy()
+{
+   sqlseedundo
+   sqlmigrundo
+}
+dbrebuild()
+{
+   sqlseedundo
+   sqlmigrundo
+   sqlmigrate
+   sqlseedall
+}
+mkcd ()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
+
 alias ..='cd ..'
 alias .-='cd -'
 alias xx='rm -rf'
@@ -38,32 +68,3 @@ alias nenvmigrate='npx dotenv sequelize db:migrate'
 alias nenvseed='npx dotenv sequelize db:seed:all'
 alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
-alienate()
-{
-   echo "alias $1='$2'" >> /home/$USER/.sources/.aliases
-   bsource
-}
-vscode()
-{
-   if [[ $# -eq 0 ]] ; then
-       code .
-   else code $1
-   fi
-}
-dbdestroy()
-{
-   sqlseedundo
-   sqlmigrundo
-}
-dbrebuild()
-{
-   sqlseedundo
-   sqlmigrundo
-   sqlmigrate
-   sqlseedall
-}
-mkcd ()
-{
-    mkdir -p -- "$1" &&
-      cd -P -- "$1"
-}
