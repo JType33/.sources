@@ -40,8 +40,8 @@ alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
 alienate()
 {
-   echo "alias $1='$2'" >> /home/jtype/.bashrc
-   source '/home/jtype/.bashrc'
+   echo "alias $1='$2'" >> /home/$USER/.sources/.aliases
+   bsource
 }
 vscode()
 {
