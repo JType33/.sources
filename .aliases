@@ -1,7 +1,11 @@
-alienate()
+ngi()
 {
-   echo "alias $1='$2'" >> /home/$USER/.sources/.aliases
-   bsource
+   npm install $1
+   npm install -g $1
+}
+ndev()
+{
+   npm install $1 --save-dev
 }
 vscode()
 {
@@ -32,6 +36,12 @@ gcp()
    git add .
    git commit -m "$1"
    git push
+}
+alias bsource=". /home/$USER/.bashrc"
+alienate()
+{
+   echo "alias $1='$2'" >> /home/$USER/.sources/.aliases
+   bsource
 }
 alias ..='cd ..'
 alias .-='cd -'
@@ -73,3 +83,4 @@ alias nenvmigrate='npx dotenv sequelize db:migrate'
 alias nenvseed='npx dotenv sequelize db:seed:all'
 alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
+alias aliases="code /home/$USER/.sources/.aliases"
