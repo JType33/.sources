@@ -1,38 +1,4 @@
-alienate()
-{
-   echo "alias $1='$2'" >> /home/$USER/.sources/.aliases
-   bsource
-}
-vscode()
-{
-   if [[ $# -eq 0 ]] ; then
-       code .
-   else code $1
-   fi
-}
-dbdestroy()
-{
-   sqlseedundo
-   sqlmigrundo
-}
-dbrebuild()
-{
-   sqlseedundo
-   sqlmigrundo
-   sqlmigrate
-   sqlseedall
-}
-mkcd()
-{
-    mkdir -p -- "$1" &&
-      cd -P -- "$1"
-}
-gcp()
-{
-   git add .
-   git commit -m "$1"
-   git push
-}
+alias aliases="code /home/$USER/.sources/.aliases"
 alias ..='cd ..'
 alias .-='cd -'
 alias xx='rm -rf'
@@ -61,15 +27,66 @@ alias sqlundo='npx sequelize-cli db:migrate:undo'
 alias sqlhardundo='npx sequelize-cli db:migrate:undo:all'
 alias sqlwhoops='sqlundo'
 alias sqlohfuck='sqlhardundo'
-alias sqlmod='npx sequelize-cli model:generate --name'
 alias sqlseed='npx sequelize-cli seed:generate --name'
 alias sqlseedall='npx sequelize-cli db:seed:all'
 alias sqlseedundo='npx sequelize-cli db:seed:undo:all'
 alias sqlmigrundo='npx sequelize-cli db:migrate:undo:all'
 alias nenv='npx dotenv'
 alias nenvsql='npx dotenv sequelize'
-alias nenvmod='npx dotenv sequelize model:generate --name'
 alias nenvmigrate='npx dotenv sequelize db:migrate'
 alias nenvseed='npx dotenv sequelize db:seed:all'
 alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
+tcode()
+{
+   touch $1
+   code $1
+}
+alienate()
+{
+   echo "alias $1='$2'" >> /home/$USER/.sources/.aliases
+   bsource
+}
+vscode()
+{
+   if [[ $# -eq 0 ]] ; then
+       code .
+   else code $1
+   fi
+}
+dbdestroy()
+{
+   sqlseedundo
+   sqlmigrundo
+}
+dbBuild()
+{
+   sqlmigrate
+   sqlseedall
+}
+dbrebuild()
+{
+   sqlseedundo
+   sqlmigrundo
+   sqlmigrate
+   sqlseedall
+}
+mkcd()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
+gcp()
+{
+   git add .
+   git commit -m "$1"
+   git push
+}
+sqlmod()
+{
+   npx sequelize-cli model:generate --name $1 --attributes "$2"
+}
+nenvmod()
+{
+   npx dotenv sequelize-cli model:generate --name $1 --attributes "$2"
+}
