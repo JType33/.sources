@@ -37,6 +37,26 @@ alias nenvmigrate='npx dotenv sequelize db:migrate'
 alias nenvseed='npx dotenv sequelize db:seed:all'
 alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
+join_by()
+{
+   local IFS="$1"
+   shift
+   echo "$*"
+}
+ngi()
+{
+   npm install $1
+   npm install -g $1
+}
+ndev()
+{
+   npm install $1 --save-dev
+}
+ngd()
+{
+   npm install $1 --save-dev
+   npm install -g $1
+}
 tcode()
 {
    touch $1
@@ -84,9 +104,9 @@ gcp()
 }
 sqlmod()
 {
-   npx sequelize-cli model:generate --name $1 --attributes "$2"
+   npx sequelize-cli model:generate --name $1 --attributes $(join_by , ${@:2})
 }
 nenvmod()
 {
-   npx dotenv sequelize-cli model:generate --name $1 --attributes "$2"
+   npx dotenv sequelize-cli model:generate --name $1 --attributes $(join_by , ${@:2})
 }
