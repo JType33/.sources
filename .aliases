@@ -142,6 +142,7 @@ aliasPull()
    bsource
    cd -
    bsource
+   echo "New alises pulled and terminal source reloaded"
 }
 aliasPush()
 {
