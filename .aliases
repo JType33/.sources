@@ -141,6 +141,7 @@ aliasPull()
    git pull
    bsource
    cd -
+   bsource
 }
 aliasPush()
 {
