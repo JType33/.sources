@@ -42,6 +42,13 @@ alias nenvdrop='npx dotenv sequelize-cli db:drop'
 alias nenvcreate='npx dotenv sequelize-cli db:create'
 alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
+hkurebuild()
+{
+   heroku run npx sequelize-cli db:seed:undo:all
+   heroku run npx sequelize-cli db:migrate:undo:all
+   heroku run npx sequelize-cli db:migrate
+   heroku run npx sequelize-cli db:seed:all
+}
 join_by()
 {
    local IFS="$1"
