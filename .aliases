@@ -124,3 +124,16 @@ nenvmod()
 {
    npx dotenv sequelize-cli model:generate --name $1 --attributes $(join_by , ${*:2})
 }
+aliasPull()
+{
+   cd "/home/$USER/.sources/"
+   git pull
+   bsource
+   cd -
+}
+aliasPush()
+{
+   cd "/home/$USER/.sources/"
+   gdp
+   cd -
+}
