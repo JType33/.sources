@@ -21,6 +21,7 @@ alias gdc='git add . && git commit -m "."'
 alias gdp='git add . && git commit -m "." && git push'
 alias psql="psql -h localhost"
 alias sql="npx sequelize-cli"
+alias sqldrop='npx sequelize-cli db:drop';
 alias sqlinit="npx sequelize-cli init"
 alias sqlmigrate='npx sequelize-cli db:migrate'
 alias sqlundo='npx sequelize-cli db:migrate:undo'
@@ -32,9 +33,13 @@ alias sqlseedall='npx sequelize-cli db:seed:all'
 alias sqlseedundo='npx sequelize-cli db:seed:undo:all'
 alias sqlmigrundo='npx sequelize-cli db:migrate:undo:all'
 alias nenv='npx dotenv'
-alias nenvsql='npx dotenv sequelize'
-alias nenvmigrate='npx dotenv sequelize db:migrate'
-alias nenvseed='npx dotenv sequelize db:seed:all'
+alias nenvsql='npx dotenv sequelize-cli'
+alias nenvmigrate='npx dotenv sequelize-cli db:migrate'
+alias nenvseed='npx dotenv sequelize-cli db:seed:all'
+alias nenvmigrundo='npx dotenv sequelize-cli db:migrate:undo:all'
+alias nenvseedundo='npx dotenv sequelize-cli db:seed:undo:all'
+alias nenvdrop='npx dotenv sequelize-cli db:drop'
+alias nenvcreate='npx dotenv sequelize-cli db:create'
 alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
 join_by()
@@ -84,6 +89,15 @@ dbBuild()
    sqlmigrate
    sqlseedall
 }
+nenvrebuild()
+{
+   nenvseedundo
+   nenvmigrundo
+   nenvdrop
+   nenvcreate
+   nenvmigrate
+   nenvseed
+}
 dbrebuild()
 {
    sqlseedundo
@@ -104,9 +118,9 @@ gcp()
 }
 sqlmod()
 {
-   npx sequelize-cli model:generate --name $1 --attributes $(join_by , ${@:2})
+   npx sequelize-cli model:generate --name $1 --attributes $(join_by , ${*:2})
 }
 nenvmod()
 {
-   npx dotenv sequelize-cli model:generate --name $1 --attributes $(join_by , ${@:2})
+   npx dotenv sequelize-cli model:generate --name $1 --attributes $(join_by , ${*:2})
 }
