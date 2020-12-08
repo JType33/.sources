@@ -57,8 +57,8 @@ join_by()
 }
 ngi()
 {
-   npm install $1
    npm install -g $1
+   npm install $1
 }
 ndev()
 {
