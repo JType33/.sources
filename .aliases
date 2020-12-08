@@ -35,7 +35,7 @@ alias sqlmigrundo='npx sequelize-cli db:migrate:undo:all'
 alias nenv='npx dotenv'
 alias nenvsql='npx dotenv sequelize-cli'
 alias nenvmigrate='npx dotenv sequelize-cli db:migrate'
-alias nenvseed='npx dotenv sequelize-cli db:seed:all'
+alias nenvseedall='npx dotenv sequelize-cli db:seed:all'
 alias nenvmigrundo='npx dotenv sequelize-cli db:migrate:undo:all'
 alias nenvseedundo='npx dotenv sequelize-cli db:seed:undo:all'
 alias nenvdrop='npx dotenv sequelize-cli db:drop'
@@ -79,7 +79,7 @@ vscode()
    else code $1
    fi
 }
-dbdestroy()
+dbrollback()
 {
    sqlseedundo
    sqlmigrundo
@@ -89,14 +89,18 @@ dbBuild()
    sqlmigrate
    sqlseedall
 }
-nenvrebuild()
+dbhardrebuild()
 {
-   nenvseedundo
-   nenvmigrundo
+   sqldrop
+   sqlmigrate
+   sqlseedall
+}
+nenvhardrebuild()
+{
    nenvdrop
    nenvcreate
    nenvmigrate
-   nenvseed
+   nenvseedall
 }
 dbrebuild()
 {
