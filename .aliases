@@ -127,14 +127,6 @@ gcp()
    git commit -m "$1"
    git push
 }
-sqlmod()
-{
-   npx sequelize-cli model:generate --name $1 --attributes $(join_by , ${*:2})
-}
-nenvmod()
-{
-   npx dotenv sequelize-cli model:generate --name $1 --attributes $(join_by , ${*:2})
-}
 aliasPull()
 {
    cd "/home/$USER/.sources/"
