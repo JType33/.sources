@@ -150,3 +150,4 @@ aliasPush()
    gdp
    cd -
 }
+alias grb='git branch -m'
