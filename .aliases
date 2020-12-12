@@ -66,8 +66,8 @@ ndev()
 }
 ngd()
 {
-   npm install $1 --save-dev
    npm install -g $1
+   npm install $1 --save-dev
 }
 tcode()
 {
