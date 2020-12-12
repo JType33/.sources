@@ -132,7 +132,7 @@ aliasPull()
    cd "/home/$USER/.sources/"
    git pull
    bsource
-   cd -
+   .-
    bsource
    echo "New alises pulled and terminal source reloaded"
 }
@@ -140,5 +140,6 @@ aliasPush()
 {
    cd "/home/$USER/.sources/"
    gdp
-   cd -
+   .-
+   bsource
 }
