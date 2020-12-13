@@ -102,6 +102,12 @@ dbhardrebuild()
    sqlmigrate
    sqlseedall
 }
+nenvbuild()
+{
+   nenvcreate
+   nenvmigrate
+   nenvseedall
+}
 nenvhardrebuild()
 {
    nenvdrop
