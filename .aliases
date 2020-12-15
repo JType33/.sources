@@ -66,8 +66,8 @@ ndev()
 }
 ngd()
 {
-   npm install $1 --save-dev
    npm install -g $1
+   npm install $1 --save-dev
 }
 tcode()
 {
@@ -102,6 +102,12 @@ dbhardrebuild()
    sqlmigrate
    sqlseedall
 }
+nenvbuild()
+{
+   nenvcreate
+   nenvmigrate
+   nenvseedall
+}
 nenvhardrebuild()
 {
    nenvdrop
@@ -132,7 +138,7 @@ aliasPull()
    cd "/home/$USER/.sources/"
    git pull
    bsource
-   cd -
+   .-
    bsource
    echo "New alises pulled and terminal source reloaded"
 }
@@ -140,6 +146,7 @@ aliasPush()
 {
    cd "/home/$USER/.sources/"
    gdp
-   cd -
+   .-
+   bsource
 }
 alias grb='git branch -m'
