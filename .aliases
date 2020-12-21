@@ -23,6 +23,7 @@ alias psql="psql -h localhost"
 alias sql="npx sequelize-cli"
 alias sqldrop='npx sequelize-cli db:drop';
 alias sqlinit="npx sequelize-cli init"
+alias sqlmod='npx sequelize-cli model:generate --name'
 alias sqlmigrate='npx sequelize-cli db:migrate'
 alias sqlundo='npx sequelize-cli db:migrate:undo'
 alias sqlhardundo='npx sequelize-cli db:migrate:undo:all'
