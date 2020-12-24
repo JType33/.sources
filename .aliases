@@ -156,3 +156,6 @@ tc()
    touch "$1"
    code "$1"
 }
+alias appio='appIO'
+alias appIo='appIO'
+alias tci='tc index.js'
