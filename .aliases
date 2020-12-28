@@ -44,12 +44,17 @@ alias nenvcreate='npx dotenv sequelize-cli db:create'
 alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
 alias grb='git branch -m'
+hkubuild()
+{
+   heroku run -a $1 npx sequelize-cli db:migrate
+   heroku run -a $1 npx sequelize-cli db:seed:all
+}
 hkurebuild()
 {
-   heroku run npx sequelize-cli db:seed:undo:all -a "$1"
-   heroku run npx sequelize-cli db:migrate:undo:all -a "$1"
-   heroku run npx sequelize-cli db:migrate -a "$1"
-   heroku run npx sequelize-cli db:seed:all -a "$1"
+   heroku run npx sequelize-cli db:seed:undo:all
+   heroku run npx sequelize-cli db:migrate:undo:all
+   heroku run npx sequelize-cli db:migrate
+   heroku run npx sequelize-cli db:seed:all
 }
 join_by()
 {
