@@ -189,3 +189,4 @@ tc()
 alias appio='appIO'
 alias appIo='appIO'
 alias tci='tc index.js'
+alias claer='clear'
