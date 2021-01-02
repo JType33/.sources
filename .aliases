@@ -63,6 +63,7 @@ vsb()
    vscode
    cd backend
    npm install
+   clear
    npm start
 }
 vsf()
@@ -71,6 +72,7 @@ vsf()
    git pull
    cd frontend
    npm install
+   clear
    npm start
 }
 ngi()
