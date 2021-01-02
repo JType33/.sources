@@ -73,8 +73,7 @@ vsb()
    npm start
 }
 vsf()
-{
-   
+{   
    cd /home/$USER/appIO/Vermillion/codebase
    git pull
    cd frontend
