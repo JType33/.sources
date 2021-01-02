@@ -56,11 +56,22 @@ hkurebuild()
    heroku run npx sequelize-cli db:migrate
    heroku run npx sequelize-cli db:seed:all
 }
-join_by()
+vsb()
 {
-   local IFS="$1"
-   shift
-   echo "$*"
+   cd /home/$USER/appIO/Vermillion/codebase
+   git pull
+   vscode
+   cd backend
+   npm install
+   npm start
+}
+vsf()
+{
+   cd /home/$USER/appIO/Vermillion/codebase
+   git pull
+   cd frontend
+   npm install
+   npm start
 }
 ngi()
 {
