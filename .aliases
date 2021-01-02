@@ -62,16 +62,29 @@ vsb()
    git pull
    vscode
    cd backend
-   npm install
+   while test $# -gt 0; do
+      case $1 in
+         -i)
+            npm install
+            shift
+      esac
+   done
    clear
    npm start
 }
 vsf()
 {
+   
    cd /home/$USER/appIO/Vermillion/codebase
    git pull
    cd frontend
-   npm install
+   while test $# -gt 0; do
+      case $1 in
+         -i)
+            npm install
+            shift
+      esac
+   done
    clear
    npm start
 }
