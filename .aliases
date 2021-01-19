@@ -45,6 +45,18 @@ alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
 alias grb='git branch -m'
 alias vermilliondeploy="cd /home/$USER/appIO/Vermillion/codebase && gcp 'Signal 0; deploying' && .-"
+flaskgen()
+{
+  flask db migrate -m "create $1 table"
+}
+flaskmigrate()
+{
+  flask db upgrade
+}
+flaskmigrundo()
+{
+  flask db downgrade $1
+}
 hkubuild()
 {
    heroku run -a $1 npx sequelize-cli db:migrate
