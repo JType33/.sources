@@ -164,7 +164,7 @@ aliasPull()
   bsource
   .-
   bsource
-  echo "New alises pulled and terminal source reloaded"
+  echo 'New alises pulled and terminal source reloaded'
 }
 aliasPush()
 {
@@ -172,18 +172,12 @@ aliasPush()
   gdp
   .-
   bsource
+  echo 'New alises pushed and terminal source reloaded'
 }
 tc()
 {
   touch "$1"
   code "$1"
-}
-testIter()
-{
-  for iter in "$@"
-  do
-    echo "$iter"
-  done
 }
 getFunky()
 {
