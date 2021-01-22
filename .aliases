@@ -45,6 +45,16 @@ alias bsource="source /home/$USER/.bashrc"
 alias ll='ls -la'
 alias grb='git branch -m'
 alias vermilliondeploy="cd /home/$USER/appIO/Vermillion/codebase && gcp 'Signal 0; deploying' && .-"
+alias appio='appIO'
+alias appIo='appIO'
+alias tci='tc index.js'
+alias claer='clear'
+alias container='docker container'
+alias dcont='docker container'
+alias dcontll='docker container ls -a'
+alias dcontl='docker container ls'
+alias dimg='docker image'
+alias dimgl='docker image ls'
 flaskgen()
 {
   flask db migrate -m "create $1 table"
@@ -59,147 +69,130 @@ flaskmigrundo()
 }
 hkubuild()
 {
-   heroku run -a $1 npx sequelize-cli db:migrate
-   heroku run -a $1 npx sequelize-cli db:seed:all
+  heroku run npx sequelize-cli db:migrate -a $1
+  heroku run npx sequelize-cli db:seed:all -a $1
 }
 hkurebuild()
 {
-   heroku run npx sequelize-cli db:seed:undo:all
-   heroku run npx sequelize-cli db:migrate:undo:all
-   heroku run npx sequelize-cli db:migrate
-   heroku run npx sequelize-cli db:seed:all
-}
-vsb()
-{
-   cd /home/$USER/appIO/Vermillion/codebase
-   git pull
-   vscode
-   cd backend
-   while test $# -gt 0; do
-      case $1 in
-         -i)
-            npm install
-            shift
-      esac
-   done
-   clear
-   npm start
-}
-vsf()
-{
-   cd /home/$USER/appIO/Vermillion/codebase
-   git pull
-   cd frontend
-   while test $# -gt 0; do
-      case $1 in
-         -i)
-            npm install
-            shift
-      esac
-   done
-   clear
-   npm start
+  heroku run npx sequelize-cli db:seed:undo:all -a $1
+  heroku run npx sequelize-cli db:migrate:undo:all -a $1
+  heroku run npx sequelize-cli db:migrate -a $1
+  heroku run npx sequelize-cli db:seed:all -a $1
 }
 ngi()
 {
-   npm install -g $1
-   npm install $1
+  npm install -g $1
+  npm install $1
 }
 ndev()
 {
-   npm install $1 --save-dev
+  npm install $1 --save-dev
 }
 ngd()
 {
-   npm install -g $1
-   npm install $1 --save-dev
+  npm install -g $1
+  npm install $1 --save-dev
 }
 tcode()
 {
-   touch $1
-   code $1
+  touch $1
+  code $1
 }
 alienate()
 {
-   echo "alias $1='$2'" >> /home/$USER/.sources/.aliases
-   bsource
+  echo "alias $1='$2'" >> "/home/$USER/.sources/.aliases"
+  bsource
 }
 vscode()
 {
-   if [[ $# -eq 0 ]] ; then
-       code .
-   else code $1
-   fi
+  if [[ $# -eq 0 ]] ; then
+      code .
+  else code $1
+  fi
 }
 dbrollback()
 {
-   sqlseedundo
-   sqlmigrundo
+  sqlseedundo
+  sqlmigrundo
 }
 dbBuild()
 {
-   sqlmigrate
-   sqlseedall
+  sqlmigrate
+  sqlseedall
 }
 dbhardrebuild()
 {
-   sqldrop
-   sqlmigrate
-   sqlseedall
+  sqldrop
+  sqlmigrate
+  sqlseedall
 }
 nenvbuild()
 {
-   nenvcreate
-   nenvmigrate
-   nenvseedall
+  nenvcreate
+  nenvmigrate
+  nenvseedall
 }
 nenvhardrebuild()
 {
-   nenvdrop
-   nenvcreate
-   nenvmigrate
-   nenvseedall
+  nenvdrop
+  nenvcreate
+  nenvmigrate
+  nenvseedall
 }
 dbrebuild()
 {
-   sqlseedundo
-   sqlmigrundo
-   sqlmigrate
-   sqlseedall
+  sqlseedundo
+  sqlmigrundo
+  sqlmigrate
+  sqlseedall
 }
 mkcd()
 {
-    mkdir -p -- "$1" &&
-      cd -P -- "$1"
+  mkdir -p -- "$1" &&
+    cd -P -- "$1"
 }
 gcp()
 {
-   git add .
-   git commit -m "$1"
-   git push
+  git add .
+  git commit -m "$1"
+  git push
 }
 aliasPull()
 {
-   cd "/home/$USER/.sources/"
-   git pull
-   bsource
-   .-
-   bsource
-   echo "New alises pulled and terminal source reloaded"
+  cd "/home/$USER/.sources/"
+  git pull
+  bsource
+  .-
+  bsource
+  echo "New alises pulled and terminal source reloaded"
 }
 aliasPush()
 {
-   cd "/home/$USER/.sources/"
-   gdp
-   .-
-   bsource
+  cd "/home/$USER/.sources/"
+  gdp
+  .-
+  bsource
 }
 tc()
 {
-   touch "$1"
-   code "$1"
+  touch "$1"
+  code "$1"
 }
-alias appio='appIO'
-alias appIo='appIO'
-alias tci='tc index.js'
-alias claer='clear'
+testIter()
+{
+  for iter in "$@"
+  do
+    echo "$iter"
+  done
+}
+getFunky()
+{
+  echo "$1()" >> "/home/$USER/.sources/.aliases"
+  echo '{' >> "/home/$USER/.sources/.aliases"
+  shift
+  for funcline in "$@"
+  do
+    echo "  $funcline" >> "/home/$USER/.sources/.aliases"
+  done
+  echo '}' >> "/home/$USER/.sources/.aliases"
+}
