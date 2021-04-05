@@ -55,9 +55,13 @@ alias dcontll='docker container ls -a'
 alias dcontl='docker container ls'
 alias dimg='docker image'
 alias dimgl='docker image ls'
+gign()
+{
+  echo $1 >> .gitignore
+}
 flaskgen()
 {
-  flask db migrate -m "create $1 table"
+  flask db migrate -m $1
 }
 flaskmigrate()
 {
@@ -69,15 +73,15 @@ flaskmigrundo()
 }
 hkubuild()
 {
-  heroku run npx sequelize-cli db:migrate -a $1
-  heroku run npx sequelize-cli db:seed:all -a $1
+  heroku run npm run sequelize db:migrate -a $1
+  heroku run npm run sequelize db:seed:all -a $1
 }
 hkurebuild()
 {
-  heroku run npx sequelize-cli db:seed:undo:all -a $1
-  heroku run npx sequelize-cli db:migrate:undo:all -a $1
-  heroku run npx sequelize-cli db:migrate -a $1
-  heroku run npx sequelize-cli db:seed:all -a $1
+  heroku run npm run sequelize db:seed:undo:all -a $1
+  heroku run npm run sequelize db:migrate:undo:all -a $1
+  heroku run npm run sequelize db:migrate -a $1
+  heroku run npm run sequelize db:seed:all -a $1
 }
 ngi()
 {
@@ -92,11 +96,6 @@ ngd()
 {
   npm install -g $1
   npm install $1 --save-dev
-}
-tcode()
-{
-  touch $1
-  code $1
 }
 alienate()
 {
