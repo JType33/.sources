@@ -192,3 +192,4 @@ getFunky()
 alias gd='git diff'
 alias gstat='git status'
 alias gc='git commit -m'
+alias unsave='npm uninstall -s'
