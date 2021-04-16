@@ -196,4 +196,5 @@ nvuse()
 {
   nvm use $1
   bsource
+  echo "NODE_PATH=$NODE_PATH"
 }
