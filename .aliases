@@ -196,5 +196,5 @@ nvuse()
 {
   nvm use $1
   bsource
-  echo "NODE_PATH=$NODE_PATH"
+  echo "global node_modules path $NODE_PATH"
 }
