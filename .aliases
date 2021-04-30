@@ -192,5 +192,9 @@ getFunky()
 alias gd='git diff'
 alias gstat='git status'
 alias gc='git commit -m'
-alias unsave='npm uninstall -s'
-alias python='python3'
+nvuse()
+{
+  nvm use $1
+  bsource
+  echo "global node_modules path $NODE_PATH"
+}
