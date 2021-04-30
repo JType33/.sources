@@ -18,7 +18,6 @@ alias ginit='git init'
 alias gfi='git init && touch .sticky && gdc'
 alias gac='git add . && git commit -m'
 alias gdc='git add . && git commit -m "."'
-alias gdp='git add . && git commit -m "." && git push'
 alias psql="psql -h localhost"
 alias sql="npx sequelize-cli"
 alias sqldrop='npx sequelize-cli db:drop';
@@ -56,6 +55,10 @@ alias dcontll='docker container ls -a'
 alias dcontl='docker container ls'
 alias dimg='docker image'
 alias dimgl='docker image ls'
+gdp()
+{
+  echo $1 >> .gitignore
+}
 gign()
 {
   echo $1 >> .gitignore
