@@ -23,6 +23,7 @@ alias psql="psql -h localhost"
 alias sql="npx sequelize-cli"
 alias sqldrop='npx sequelize-cli db:drop';
 alias sqlinit="npx sequelize-cli init"
+alias sqlcreate="npx sequelize-cli db:create"
 alias sqlmod='npx sequelize-cli model:generate --name'
 alias sqlmigrate='npx sequelize-cli db:migrate'
 alias sqlundo='npx sequelize-cli db:migrate:undo'
@@ -122,6 +123,7 @@ dbBuild()
 dbhardrebuild()
 {
   sqldrop
+  sqlcreate
   sqlmigrate
   sqlseedall
 }
@@ -198,3 +200,4 @@ nvuse()
   bsource
   echo "global node_modules path $NODE_PATH"
 }
+alias clexit='clear && exit'
