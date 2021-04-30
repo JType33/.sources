@@ -58,7 +58,7 @@ alias dimgl='docker image ls'
 gdp()
 {
   git add .
-  git commit -m "."
+  git commit -m "." || true
   echo "what the fuck"
 }
 gign()
