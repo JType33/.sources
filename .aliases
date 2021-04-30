@@ -59,7 +59,7 @@ gdp()
 {
   git add .
   git commit -m "." || true
-  echo "what the fuck"
+  echo "changes"
 }
 gign()
 {
