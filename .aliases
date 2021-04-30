@@ -57,7 +57,8 @@ alias dimg='docker image'
 alias dimgl='docker image ls'
 gdp()
 {
-  gdc
+  git add .
+  git commit -m "."
   git push
 }
 gign()
