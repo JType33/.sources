@@ -206,3 +206,4 @@ nvuse()
   echo "global node_modules path $NODE_PATH"
 }
 alias clexit='clear && exit'
+alias bedit='code /home/$USER/.bashrc'
