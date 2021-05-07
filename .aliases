@@ -92,7 +92,6 @@ hkurebuild()
 ngi()
 {
   npm install -g $1
-  npm install $1
 }
 ndev()
 {
@@ -207,3 +206,6 @@ nvuse()
 }
 alias clexit='clear && exit'
 alias bedit='code $HOME/.bashrc'
+alias studio='studio.sh'
+alias tor='start-tor-browser.desktop'
+alias unsave='npm uninstall -S'
