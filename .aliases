@@ -210,3 +210,8 @@ alias studio='studio.sh'
 alias tor='start-tor-browser.desktop'
 alias unsave='npm uninstall -S'
 alias tnode='npx ts-node'
+alias sqlmigen='npx sequelize-cli migration:generate --name'
+ignore()
+{
+  echo $1 >> .gitignore
+}
