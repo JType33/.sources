@@ -15,7 +15,6 @@ alias wk7='cd ~/appIO/module3/wk7'
 alias wk8='cd ~/appIO/module3/wk8'
 alias wk9='cd ~/appIO/module3/wk9'
 alias ginit='git init'
-alias gfi='git init && touch .sticky && gdc'
 alias gac='git add . && git commit -m'
 alias gdc='git add . && git commit -m "."'
 alias psql="psql -h localhost"
@@ -217,3 +216,10 @@ ignore()
 }
 alias save='npm install'
 alias devsave='npm install -D'
+gfi()
+{
+  git init
+  git add .
+  git commit -m "initialized"
+  grb Deploy
+}
