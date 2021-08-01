@@ -223,3 +223,4 @@ gfi()
   git commit -m "initialized"
   grb Deploy
 }
+alias clearstart='clear && npm start'
