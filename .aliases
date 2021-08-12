@@ -87,11 +87,6 @@ ngd()
   npm install -g $1
   npm install $1 --save-dev
 }
-alienate()
-{
-  echo "alias $1='$2'" >> "/home/$USER/.sources/.aliases"
-  bsource
-}
 vscode()
 {
   if [[ $# -eq 0 ]] ; then
@@ -163,6 +158,11 @@ aliasPush()
   .-
   bsource
   echo 'New alises pushed and terminal source reloaded'
+}
+alienate()
+{
+  echo "alias $1='$2'" >> "/home/$USER/.sources/.aliases"
+  aliasPush
 }
 tc()
 {
