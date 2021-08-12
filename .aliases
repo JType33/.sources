@@ -212,3 +212,4 @@ gfi()
 alias clearstart='clear && npm start'
 alias grexit='green_garden && clear && exit'
 alias bedit='code ~/.bashrc'
+alias clup='clear && ..'
