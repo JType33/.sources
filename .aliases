@@ -179,6 +179,7 @@ getFunky()
     echo "  $funcline" >> "/home/$USER/.sources/.aliases"
   done
   echo '}' >> "/home/$USER/.sources/.aliases"
+  aliasPush
 }
 alias gd='git diff'
 alias gstat='git status'
@@ -214,3 +215,8 @@ alias grexit='green_garden && clear && exit'
 alias bedit='code ~/.bashrc'
 alias clup='clear && ..'
 alias unnode='xx node_modules'
+renode()
+{
+  unnode
+  npm install
+}
