@@ -146,7 +146,6 @@ aliasPull()
 {
   cd "/home/$USER/.sources/"
   git pull
-  bsource
   .-
   bsource
   echo 'New alises pulled and terminal source reloaded'
