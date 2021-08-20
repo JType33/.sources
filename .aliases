@@ -219,3 +219,8 @@ renode()
   unnode
   npm install
 }
+toDev()
+{
+  unsave $1
+  devsave $1
+}
