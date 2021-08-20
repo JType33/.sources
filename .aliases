@@ -224,3 +224,8 @@ toDev()
   unsave $1
   devsave $1
 }
+toProd()
+{
+  unsave $1
+  save $1
+}
