@@ -205,11 +205,13 @@ alias devsave='npm install -D'
 gfi()
 {
   git init
+  ignore 'node_modules'
+  ignore 'build'
+  ignore '.env'
   git add .
   git commit -m "initialized"
   grb Deploy
 }
-alias clearstart='clear && npm start'
 alias grexit='green_garden && clear && exit'
 alias bedit='code ~/.bashrc'
 alias clup='clear && ..'
@@ -228,4 +230,16 @@ toProd()
 {
   unsave $1
   save $1
+}
+clearstart()
+{
+  if ls | grep -q node_modules
+    then
+      clear
+      npm start
+    else
+      npm install
+      clear
+      npm start
+  fi
 }
