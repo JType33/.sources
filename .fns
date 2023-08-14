@@ -1,0 +1,378 @@
+add-path()
+{
+  echo "export PATH=\"$1:\$PATH\"" >> "$HOME/$PROFILE"
+}
+gdp()
+{
+  git add .
+  git commit -m "." 1>/dev/null || true 1>/dev/null
+  git push 1>/dev/null
+}
+gign()
+{
+  echo $1 >> .gitignore
+}
+flaskgen()
+{
+  flask db migrate -m $1
+}
+flaskmigrate()
+{
+  flask db upgrade
+}
+flaskmigrundo()
+{
+  flask db downgrade $1
+}
+hkubuild()
+{
+  heroku run npm run sequelize db:migrate -a $1
+  heroku run npm run sequelize db:seed:all -a $1
+}
+hkurebuild()
+{
+  heroku run npm run sequelize db:seed:undo:all -a $1
+  heroku run npm run sequelize db:migrate:undo:all -a $1
+  heroku run npm run sequelize db:migrate -a $1
+  heroku run npm run sequelize db:seed:all -a $1
+}
+ngi()
+{
+  npm install -g $1
+}
+ndev()
+{
+  npm install $1 --save-dev
+}
+ngd()
+{
+  npm install -g $1
+  npm install $1 --save-dev
+}
+vscode()
+{
+  if [ $# -eq 0 ] ; then
+      code .
+  else code $1
+  fi
+}
+dbrollback()
+{
+  sqlseedundo
+  sqlmigrundo
+}
+dbBuild()
+{
+  sqlmigrate
+  sqlseedall
+}
+dbhardrebuild()
+{
+  sqldrop
+  sqlcreate
+  sqlmigrate
+  sqlseedall
+}
+nenvbuild()
+{
+  nenvcreate
+  nenvmigrate
+  nenvseedall
+}
+nenvhardrebuild()
+{
+  nenvdrop
+  nenvcreate
+  nenvmigrate
+  nenvseedall
+}
+dbrebuild()
+{
+  sqlseedundo
+  sqlmigrundo
+  sqlmigrate
+  sqlseedall
+}
+mkcd()
+{
+  mkdir -p "$1"
+  cd "$1"
+}
+gcp()
+{
+  git add .
+  git commit -m "$1"
+  git push
+}
+alias-pull()
+{
+  cd "$HOME/.sources/"
+  git pull 1>/dev/null
+  .- 1>/dev/null
+  . ~/.sources/.aliases
+  . ~/.sources/.fns
+  . ~/.sources/.envs
+  echo 'New alises pulled and terminal source reloaded'
+}
+alias-push()
+{
+  cd "$HOME/.sources/"
+  gdp 1>/dev/null
+  .- 1>/dev/null
+  . ~/.sources/.aliases
+  . ~/.sources/.fns
+  . ~/.sources/.envs
+  echo 'New alises pushed and terminal source reloaded'
+}
+alienate()
+{
+  echo "alias $1=\"$2\"" >> "$HOME/.sources/.aliases"
+  alias-push
+}
+tc()
+{
+  touch "$1"
+  code "$1"
+}
+get-funky()
+{
+  echo "$1()" >> "$HOME/.sources/.fns"
+  echo '{' >> "$HOME/.sources/.fns"
+  shift
+  for funcline in "$@"
+  do
+    echo "  $funcline" >> "$HOME/.sources/.fns"
+  done
+  echo '}' >> "$HOME/.sources/.fns"
+  alias-push
+  type $1
+}
+nvuse()
+{
+  nvm use $1
+  bsource
+  echo "global node_modules path $NODE_PATH"
+}
+ignore()
+{
+  echo $1 >> .gitignore
+}
+gfi()
+{
+  git init
+  ignore 'node_modules'
+  ignore 'build'
+  ignore '.env'
+  touch .gitkeep
+  git add .
+  git commit -m "initialized"
+  grb Deploy
+}
+renode()
+{
+  unnode
+  npm install
+}
+todev()
+{
+  unsave "$@"
+  devsave "$@"
+}
+toprod()
+{
+  unsave "$@"
+  save "$@"
+}
+clearstart()
+{
+  if ls | grep -q node_modules
+    then
+      clear
+      npm start
+    else
+      npm install
+      clear
+      npm start
+  fi
+}
+psqlx()
+{
+  if [ $# -lt 2 ]
+    then
+      capt=$1
+      echo $capt > $HOME/exc.sql
+      if [ "${capt: -1}" != ";" ]
+        then
+          echo ';' >> $HOME/exc.sql
+      fi
+      psql -d postgres < $HOME/exc.sql
+  else
+    capt=$2
+    echo $2 > $HOME/exc.sql
+    if [ "${capt: -1}" != ";" ]
+      then
+        echo ';' >> $HOME/exc.sql
+    fi
+    psql -d $1 < $HOME/exc.sql
+  fi
+}
+cbuild()
+{
+  "/mnt/j/msys64/mingw64/bin/g++.exe" "$1.cpp" -m64 --static -o "$1.exe"
+}
+reactinit()
+{
+  cp -r $HOME/projects/starters/react-frontend/. "$(pwd)"
+  xx .git
+  npm install
+}
+expressinit()
+{
+  if [ $# -eq 0 ]
+    then
+      cp -r $HOME/projects/starters/express-react-fullstack/. .
+      cd backend
+      npm install
+      cd ../frontend
+      npm install
+      cd ..
+      clear
+  else
+    mkcd $1
+    expressinit
+  fi
+}
+flaskinit()
+{
+  if [ $# -eq 0 ]
+    then
+      cp -r $HOME/projects/starters/flask-react-fullstack/. "$(pwd)"
+  else
+    mkcd $1
+    flaskinit
+  fi
+}
+green-garden()
+{
+  cd ~/committer
+  echo '.' >> holder.txt;
+  gdc
+  echo '.' >> holder.txt;
+  gdc
+  echo '.' >> holder.txt;
+  gdc
+  echo '.' >> holder.txt;
+  gdc
+  echo '.' >> holder.txt;
+  gdp
+  cd -
+}
+swiftpm-reset()
+{
+  find ~/projects/swift -name '.build' | xargs rm -rf
+  find ~/projects/swift -name '.swiftpm' | xargs rm -rf
+  xx ~/Library/Caches/org.swift.swiftpm/repositories/*
+  xx ~/Library/Developer/Xcode/DerivedData/*
+}
+docker-gp()
+{
+  echo "Pruning docker containers..."
+  docker container prune -f 1>/dev/null
+  echo "Finished pruning containers"
+  echo "Pruning docker images..."
+  docker image prune -fa 1>/dev/null
+  echo "Finished pruning images"
+  echo "Pruning docker system cache..."
+  docker system prune -fa 1>/dev/null
+  echo "Finished pruning system cache"
+}
+ds-nuke()
+{
+  find /Users/jm/ -name "\.DS_Store" 2>/dev/null | xargs rm -f
+}
+npm-reinstall()
+{
+  npm uninstall -S $1
+  npm install $1
+}
+git-squash()
+{
+  git reset --soft HEAD~$1
+  git commit -m "$2"
+}
+cdl()
+{
+  cd $1
+  clearl
+}
+toggle-prompt()
+{
+  if [[ "$PS1" == "$TITLEPROMPT" ]]
+  then
+      PS1=$NOTITLEPROMPT
+  else
+      PS1=$TITLEPROMPT
+  fi
+  clear
+}
+fname()
+{
+  find / \
+  -not \( -path "/mnt/j" -prune \) \
+  -not \( -path "/mnt/c" -prune \) \
+  -not \( -path "/mnt/x" -prune \) \
+  -name "$1" 2>/dev/null
+}
+fhere()
+{
+  find . \
+  -not \( -path "/mnt/j" -prune \) \
+  -not \( -path "/mnt/c" -prune \) \
+  -not \( -path "/mnt/x" -prune \) \
+  -name "$1" 2>/dev/null
+}
+set-env()
+{
+  if grep -qn "$1" ~/.sources/.envs 2>/dev/null
+    then
+      echo "Found existing value(s) for $1"
+      grep -n "$1" ~/.envs
+      echo "Overwriting..."
+  fi
+  echo "export $1=\"$2\"" >> ~/.sources/.envs
+  alias-push
+  echo "set var $1 to val $2, reloading..."
+  bsource
+}
+open-project()
+{
+  cd "~/projects/$1/$2"
+}
+clopen()
+{
+  git clone $1
+  NEW_FOLDER_LOCATION=`echo "$1" | grep -oE [^\/]+$`
+  cd $NEW_FOLDER_LOCATION
+}
+seek-and-destroy()
+{
+  fhere $1 | xargs rm -rf 2>/dev/null
+}
+lucex-rebuild()
+{
+  xx ~/projects/cercle/lucex/_build/
+  xx ~/projects/cercle/lucex/deps/
+  xx ~/projects/cercle/lucex/priv/static/assets/
+  xx ~/projects/cercle/lucex/assets/node_modules/
+  cd ~/projects/cercle/lucex/
+  mix deps.get
+  mix compile
+  .- 1>/dev/null
+  cd ~/projects/cercle/lucex/assets/
+  npm install
+  .- 1>/dev/null
+}
+kns ()
+{
+  kubectl config set-context --current --namespace="$1"
+}
