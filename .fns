@@ -358,12 +358,18 @@ seek-and-destroy()
 {
   fhere $1 | xargs rm -rf 2>/dev/null
 }
+elixir-cache-clear()
+{
+  xx ~/.hex/packages/hexpm/*
+}
 lucex-rebuild()
 {
+  elixir-cache-clear
   xx ~/projects/cercle/lucex/_build/
   xx ~/projects/cercle/lucex/deps/
   xx ~/projects/cercle/lucex/priv/static/assets/
   xx ~/projects/cercle/lucex/assets/node_modules/
+  xx ~/projects/cercle/lucex/mix.lock
   cd ~/projects/cercle/lucex/
   mix deps.get
   mix compile
