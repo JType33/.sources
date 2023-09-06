@@ -387,3 +387,11 @@ wdn ()
   sudo wg-quick down wg0 2>/dev/null
   sudo wg-quick down wg1 2>/dev/null
 }
+feature-merge ()
+{
+  git pull
+  git merge staging --no-ff -m "Luce $1"
+  git tag -a $1 -m "Deploy $1"
+  git push
+  git push --tags
+}
