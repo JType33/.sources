@@ -366,6 +366,7 @@ lucex-rebuild()
 {
   elixir-cache-clear
   xx ~/projects/cercle/lucex/_build/
+  xx ~/projects/cercle/lucex/.elixir_ls/
   xx ~/projects/cercle/lucex/deps/
   xx ~/projects/cercle/lucex/priv/static/assets/
   xx ~/projects/cercle/lucex/assets/node_modules/
@@ -375,7 +376,10 @@ lucex-rebuild()
   mix compile
   .- 1>/dev/null
   cd ~/projects/cercle/lucex/assets/
-  npm install
+  xx node_modules/
+  xx bun.lockb
+  bun pm cache rm
+  bun install
   .- 1>/dev/null
 }
 kns ()
