@@ -377,9 +377,8 @@ lucex-rebuild()
   .- 1>/dev/null
   cd ~/projects/cercle/lucex/assets/
   xx node_modules/
-  xx bun.lockb
-  bun pm cache rm
-  bun install
+  xx package-lock.json
+  npm install
   .- 1>/dev/null
 }
 kns ()
